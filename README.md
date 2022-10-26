@@ -25,3 +25,4 @@
 * created environment variable and encrypted the values.
 * installed react-hook-form.
 * installed react icons for icons
+* Login page Decorated

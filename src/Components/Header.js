@@ -12,6 +12,10 @@ import Form from 'react-bootstrap/Form';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Image } from 'react-bootstrap';
 
+import { HiOutlineUser } from "react-icons/hi";
+
+
+
 
 
 const Header = () => {
@@ -63,7 +67,7 @@ const Header = () => {
                                 {
                                     user.photoURL?
                                     <Image style={{height: '30px', width: '30px'}} roundedCircle src={user.photoURL} /> :
-                                    <Image style={{height: '30px', width: '30px'}} roundedCircle src='"https://i.ibb.co/vBg5s0M/Microsites-bro.png"' />
+                                    <HiOutlineUser/>
                                 }
                             </Nav.Link>
                         </LinkContainer>

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithPopup } from "firebase/auth";
+import app from '../FireBase/FireBase.config';
 
 export const UniversalContext = createContext();
-// const auth = getAuth();
+const auth = getAuth(app);
 
 const ContexSupplier = ({children}) => {
+
+    const googleLogInProvider = (provider) => {
+        return signInWithPopup(auth, provider);
+    }
 
     const [mode, setmode] = useState("light");
 
@@ -31,6 +36,8 @@ const ContexSupplier = ({children}) => {
         user,
         toggleMode,
         mode, 
+        googleLogInProvider, 
+
         
     };
 
