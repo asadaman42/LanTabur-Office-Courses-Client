@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
+import { getAuth } from "firebase/auth";
 
 export const UniversalContext = createContext();
+// const auth = getAuth();
 
 const ContexSupplier = ({children}) => {
 
@@ -20,7 +22,10 @@ const ContexSupplier = ({children}) => {
         }
     };
 
-    const user = {displayName: 'asad'}
+    const user = {
+        displayName: 'asad',
+        photoURL: 'https://i.ibb.co/vBg5s0M/Microsites-bro.png'
+    }
 
     const contextInformation = {
         user,

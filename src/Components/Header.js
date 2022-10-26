@@ -10,6 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Image } from 'react-bootstrap';
 
 
 
@@ -51,7 +52,7 @@ const Header = () => {
 
                         <Form.Switch onClick={toggleMode} id="custom-switch" label="Dark Mode" />
 
-                        <LinkContainer to="/">
+                        <LinkContainer to="/login">
                             <Nav.Link href="">
                                 <Button variant="primary">Log In</Button>
                             </Nav.Link>
@@ -59,13 +60,11 @@ const Header = () => {
 
                         <LinkContainer to="/">
                             <Nav.Link href="">
-                                <img
-                                    alt=""
-                                    src="https://i.ibb.co/vBg5s0M/Microsites-bro.png"
-                                    width="30"
-                                    height="30"
-                                    className="d-inline-block align-top"
-                                />
+                                {
+                                    user.photoURL?
+                                    <Image style={{height: '30px', width: '30px'}} roundedCircle src={user.photoURL} /> :
+                                    <Image style={{height: '30px', width: '30px'}} roundedCircle src='"https://i.ibb.co/vBg5s0M/Microsites-bro.png"' />
+                                }
                             </Nav.Link>
                         </LinkContainer>
 
