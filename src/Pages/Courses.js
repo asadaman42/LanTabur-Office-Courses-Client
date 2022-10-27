@@ -7,11 +7,11 @@ const Courses = () => {
     const courses = useLoaderData();
     
     return (
-        <div>
-            <h4 className='text-center'>
+        <div className='mx-5 my-5'>
+            <h4 className='text-center my-5'>
                 All {courses.length} courses.
             </h4>
-            <Row xs={1} md={2} className="g-4">
+            <Row xs={1} md={2} lg={3} className="g-5">
                 {
                     courses.map(course =>
                         <Course
