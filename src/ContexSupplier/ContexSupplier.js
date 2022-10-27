@@ -12,6 +12,10 @@ const ContexSupplier = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
+    const githubLogInProvider = (provider) => {
+        return signInWithPopup(auth, provider);
+    };
+
 
     const googleLogInProvider = (provider) => {
         setLoading(true);
@@ -45,10 +49,7 @@ const ContexSupplier = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (presentStudent) => {
-            
-            if (presentStudent === null || presentStudent.emailVerified) {
-                setUser(presentStudent);
-            }
+            setUser(presentStudent);
             setLoading(false);
         });
 
@@ -89,6 +90,8 @@ const ContexSupplier = ({ children }) => {
         setLoading,
         updatePhotoAndName,
         emailVerify,
+        githubLogInProvider,
+        setUser
     };
 
     return (

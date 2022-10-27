@@ -85,7 +85,7 @@ const Header = () => {
                                 {
                                     user?.uid ?
                                         <>
-                                            <span className='me-2'>{user?.displayName}</span>
+                                            <span className='m-2'>{user?.displayName}</span>
                                             <Button onClick={signOut} variant='secondary'> Sign Out</Button>
                                         </>
                                         :
@@ -96,9 +96,7 @@ const Header = () => {
 
                                 }
                             </>
-                            <Nav.Link href="">
-                                {user?.displayName}
-                            </Nav.Link>
+                            
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

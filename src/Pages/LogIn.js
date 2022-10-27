@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
 import { useContext } from 'react';
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
@@ -10,9 +10,10 @@ import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const LogIn = () => {
 
-    const { googleLogInProvider } = useContext(UniversalContext)
+    const { googleLogInProvider, githubLogInProvider, setUser } = useContext(UniversalContext)
 
-    const googleProvider = new GoogleAuthProvider()
+    const googleProvider = new GoogleAuthProvider();
+    const gitHubProvider = new GithubAuthProvider();
 
     const googleLogIn = () => {
         googleLogInProvider(googleProvider)
@@ -21,8 +22,16 @@ const LogIn = () => {
                 console.log(user);
             })
             .catch(error => console.error(error));
+    };
 
-    }
+    const gitHubLogIn = () => {
+        githubLogInProvider(gitHubProvider)
+            .then(result => {
+                const user = result.user;
+
+            })
+            .catch(error => console.error(error));
+    };
 
 
 
@@ -31,7 +40,7 @@ const LogIn = () => {
             <ButtonGroup vertical className='my-5'>
                 <Link to='/loginemail'> <Button className='mb-3 mt-5'> <HiOutlineMail></HiOutlineMail>  Sign in with e-mail & password  </Button></Link>
                 <Button onClick={googleLogIn} className='mb-3'> <FaGoogle></FaGoogle> sign in with Google </Button>
-                <Button className='mb-3'> <FaGithub /> Sign in with gitHub </Button>
+                <Button onClick={gitHubLogIn} className='mb-3'> <FaGithub /> Sign in with gitHub </Button>
                 <p> No account yet ? <Link to='/register'> Sign up</Link> </p>
             </ButtonGroup>
         </div>

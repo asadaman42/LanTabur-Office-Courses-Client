@@ -37,6 +37,8 @@
 * accept checkbox made functional
 * Email verification
 * Prevent User entering without verification
+* github authentication successful
+* shift to database function 
 
 
 
