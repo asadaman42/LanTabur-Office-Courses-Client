@@ -35,6 +35,8 @@
 * Applied fidget spinner on loading
 * name and photo update
 * accept checkbox made functional
+* Email verification
+* Prevent User entering without verification
 
 
 

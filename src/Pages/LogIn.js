@@ -10,7 +10,7 @@ import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const LogIn = () => {
 
-    const { emailLoginProvider, googleLogInProvider } = useContext(UniversalContext)
+    const { googleLogInProvider } = useContext(UniversalContext)
 
     const googleProvider = new GoogleAuthProvider()
 

@@ -11,16 +11,18 @@ const Protected = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        <FidgetSpinner
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper"
-            ballColors={['#ff0000', '#00ff00', '#0000ff']}
-            backgroundColor="#F4442E"
-        />
+        return <div className='text-center my-5'>
+            <FidgetSpinner
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="dna-loading"
+                wrapperStyle={{}}
+                wrapperClass='my-5'
+                ballColors={['#ff0000', '#00ff00', '#0000ff']}
+                backgroundColor="#F4442E"
+            />
+        </div>
     }
 
     if (user) {

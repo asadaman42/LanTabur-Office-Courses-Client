@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../FireBase/FireBase.config';
 import { useEffect } from 'react';
 
@@ -23,33 +23,40 @@ const ContexSupplier = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    const emailVerify = () => {
+        return sendEmailVerification(auth.currentUser);
+    };
+
 
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
-    }
+    };
 
     const createUserByEmailAndPassword = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
-    }
+    };
 
     const updatePhotoAndName = photoAndName => {
         updateProfile(auth.currentUser, photoAndName);
-    }
+    };
 
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (presentStudent) => {
-            setUser(presentStudent);
+            
+            if (presentStudent === null || presentStudent.emailVerified) {
+                setUser(presentStudent);
+            }
             setLoading(false);
         });
 
         return () => {
             unsubscribe();
-        }
+        };
 
-    }, [])
+    }, []);
 
 
 
@@ -79,7 +86,9 @@ const ContexSupplier = ({ children }) => {
         createUserByEmailAndPassword,
         emailLoginProvider,
         loading,
+        setLoading,
         updatePhotoAndName,
+        emailVerify,
     };
 
     return (

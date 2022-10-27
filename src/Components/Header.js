@@ -15,10 +15,6 @@ import { Image } from 'react-bootstrap';
 import { HiOutlineUser } from "react-icons/hi";
 import { Link, Navigate } from 'react-router-dom';
 
-import { FidgetSpinner } from 'react-loader-spinner'
-
-
-
 
 
 const Header = () => {
@@ -85,7 +81,7 @@ const Header = () => {
 
 
 
-                            <Nav.Link href="">
+                            <>
                                 {
                                     user?.uid ?
                                         <>
@@ -94,12 +90,12 @@ const Header = () => {
                                         </>
                                         :
                                         <>
-                                            <Link to='/login'> <Button>Log In</Button></Link>
-                                            <Link to='/register'> <Button> Register </Button> </Link>
+                                            <Link to='/login'> <Button className='m-1'>Log In</Button></Link>
+                                            <Link to='/register'> <Button className='m-1'> Register </Button> </Link>
                                         </>
 
                                 }
-                            </Nav.Link>
+                            </>
                             <Nav.Link href="">
                                 {user?.displayName}
                             </Nav.Link>

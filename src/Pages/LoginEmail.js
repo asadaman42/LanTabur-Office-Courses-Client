@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const LoginEmail = () => {
-    const { emailLoginProvider } = useContext(UniversalContext);
+    const { emailLoginProvider, setLoading } = useContext(UniversalContext);
     const [error, setError] = useState('')
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -23,11 +24,20 @@ const LoginEmail = () => {
                 const user = result.user;
                 e.target.reset();
                 setError('');
-                navigate(from, { replace: true });
+                if (user.emailVerified) {
+                    navigate(from, { replace: true });                    
+                }
+                else {
+                    toast.error('email not verified')
+                }
             })
             .catch(error => {
                 console.error(error)
                 setError(error.message);
+            })
+            .finally( () => {
+                setLoading(false);
+                
             })
     }
 
