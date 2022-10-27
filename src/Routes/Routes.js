@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Blog from "../Pages/Blog";
 import CheckOut from "../Pages/CheckOut";
 import Courses from "../Pages/Courses";
+import Homepage from "../Pages/Homepage";
 import LogIn from "../Pages/LogIn";
 import LoginEmail from "../Pages/LoginEmail";
 import Register from "../Pages/Register";
@@ -15,6 +16,10 @@ export const routes = createBrowserRouter([
         path: '/',
         element: <Main></Main>,
         children: [
+            {
+                path: '/',
+                element: <Homepage></Homepage>
+            },
             {
                 path: '/login',
                 element: <LogIn></LogIn>
@@ -30,17 +35,17 @@ export const routes = createBrowserRouter([
             {
                 path: '/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/category/')
+                loader: () => fetch('https://10th-assignment-25-10-22-server.vercel.app/category/')
             },
             {
                 path: '/category/:id',
                 element: <ViewDetails></ViewDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://10th-assignment-25-10-22-server.vercel.app/category/${params.id}`)
             },
             {
                 path: '/checkout/:id',
                 element: <Protected> <CheckOut></CheckOut> </Protected>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://10th-assignment-25-10-22-server.vercel.app/category/${params.id}`)
 
             },
             {

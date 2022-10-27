@@ -1,33 +1,36 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const LeftSideNav = () => {
 
     const [category, setCategory] = useState([]);
 
-    useEffect( () =>{
-        fetch('http://localhost:5000/category/')
-        .then( res => res.json())
-        .then(data => setCategory(data));
+    useEffect(() => {
+        fetch('https://10th-assignment-25-10-22-server.vercel.app/category/')
+            .then(res => res.json())
+            .then(data => setCategory(data));
     }, []);
 
 
     return (
-        <div>
-            <h4>All Category: {category.length}</h4>
-            <div>
+        <div className='mx-4 my-4'>
+            <h4> {category.length} Categories: </h4>
+            <ListGroup>
                 {
                     category.map(
-                        course => 
-                        <p key={course.id}>
-                            <Link to={`/category/${course.id}`}>
-                                {course.categoryName}
+                        course =>
+                            <Link to={`/category/${course.id}`} key={course.id}>
+                                <ListGroup.Item                                    
+                                    action
+                                    variant="light">
+                                    {course.categoryName}
+                                </ListGroup.Item>
                             </Link>
-                        </p>
                     )
                 }
-            </div>
+            </ListGroup>
         </div>
     );
 };

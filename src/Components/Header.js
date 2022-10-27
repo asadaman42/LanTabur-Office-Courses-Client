@@ -13,6 +13,7 @@ import { Image } from 'react-bootstrap';
 
 import { HiOutlineUser } from "react-icons/hi";
 import { Link, Navigate } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 
 
@@ -31,6 +32,9 @@ const Header = () => {
 
     return (
         <div>
+            <ReactTooltip place="top" type="success" effect="float"/>
+
+
             <Navbar
                 collapseOnSelect
                 expand="lg"
