@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 import './App.css';
 import { routes } from './Routes/Routes';
@@ -12,6 +13,7 @@ function App() {
         position="top-right"
         reverseOrder={false}
       />
+      <ReactTooltip place="top" type="success" effect="float"/>
       
     </div>
   );
