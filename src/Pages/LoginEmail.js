@@ -1,54 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
-import { useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
+const LoginEmail = () => {
+    const { emailLoginProvider } = useContext(UniversalContext);
+    const [error, setError] = useState('')
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
-const Register = () => {
-    const {createUserByEmailAndPassword} = useContext(UniversalContext);
-    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const onSubmit = (data, e) => {
-        
-        const {name, email, PhotoURL, password} = data;
-        
-        createUserByEmailAndPassword(email, password)
-        .then(result => {
-            const user = result.user;
-            e.target.reset();
-            setError('')
-        })
-        .catch(error => {
-            console.error(error);
-            setError(error.message);
-        })
+
+        const { email, password } = data;
+
+        emailLoginProvider(email, password)
+            .then(result => {
+                const user = result.user;
+                e.target.reset();
+                setError('');
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message);
+            })
     }
 
     return (
         <div className='w-75 mx-auto mt-5'>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type='text' placeholder='Your Full Name' {...register("name", { required: true })} />
-                    <Form.Text className="text-muted">
-                        Write your full name.
-                    </Form.Text>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" {...register("email", { required: true })} />
                     <Form.Text className="text-muted">
                         Provide a valid e-mail address.
                     </Form.Text>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Photo URL</Form.Label>
-                    <Form.Control type="text" placeholder='Your Photo URL' {...register("PhotoURL")} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -59,31 +50,24 @@ const Register = () => {
                     </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Accept our terms and conditions." />
-                </Form.Group>
-
                 <Button variant="primary" type="submit" className="mb-3">
-                    Register
+                    Sign In
                 </Button>
 
                 <Form.Group>
                     <Form.Text>
-                        Already have an account? Please <Link to='/login'>Log in</Link>
+                        No account yet ? <Link to='/register'> Sign up</Link>
                     </Form.Text>
                 </Form.Group>
+
                 <Form.Group>
                     <Form.Text>
                         {error}
                     </Form.Text>
                 </Form.Group>
             </Form>
-
-
-
         </div>
-
     );
 };
 
-export default Register;
+export default LoginEmail;

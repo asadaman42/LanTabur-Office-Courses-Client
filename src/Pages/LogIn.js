@@ -10,17 +10,17 @@ import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const LogIn = () => {
 
-    const {googleLogInProvider} = useContext(UniversalContext)
+    const { emailLoginProvider, googleLogInProvider } = useContext(UniversalContext)
 
     const googleProvider = new GoogleAuthProvider()
 
     const googleLogIn = () => {
         googleLogInProvider(googleProvider)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-
-        })
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error));
 
     }
 
@@ -29,7 +29,7 @@ const LogIn = () => {
     return (
         <div className='text-center mx-auto my-5'>
             <ButtonGroup vertical className='my-5'>
-                <Button className='mb-3 mt-5'> <HiOutlineMail></HiOutlineMail> Sign in with e-mail & password</Button>
+                <Link to='/loginemail'> <Button className='mb-3 mt-5'> <HiOutlineMail></HiOutlineMail>  Sign in with e-mail & password  </Button></Link>
                 <Button onClick={googleLogIn} className='mb-3'> <FaGoogle></FaGoogle> sign in with Google </Button>
                 <Button className='mb-3'> <FaGithub /> Sign in with gitHub </Button>
                 <p> No account yet ? <Link to='/register'> Sign up</Link> </p>

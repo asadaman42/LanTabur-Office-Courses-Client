@@ -1,16 +1,54 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
-import { getAuth, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../FireBase/FireBase.config';
+import { useEffect } from 'react';
 
 export const UniversalContext = createContext();
 const auth = getAuth(app);
 
-const ContexSupplier = ({children}) => {
+const ContexSupplier = ({ children }) => {
+
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+
 
     const googleLogInProvider = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
+    };
+
+    const emailLoginProvider = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
     }
+
+
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    }
+
+    const createUserByEmailAndPassword = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password);
+    }
+
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged (auth, (presentStudent) => {
+            console.log(presentStudent);
+            setUser(presentStudent);
+            setLoading(false);
+        });
+
+        return () => {
+            unsubscribe();
+        }
+
+    }, [])
+
+
 
     const [mode, setmode] = useState("light");
 
@@ -27,25 +65,24 @@ const ContexSupplier = ({children}) => {
         }
     };
 
-    const user = {
-        displayName: 'asad',
-        photoURL: 'https://i.ibb.co/vBg5s0M/Microsites-bro.png'
-    }
+    
 
     const contextInformation = {
         user,
         toggleMode,
-        mode, 
-        googleLogInProvider, 
-
-        
+        mode,
+        googleLogInProvider,
+        logOut,
+        createUserByEmailAndPassword,
+        emailLoginProvider,
+        loading,
     };
 
     return (
         <div>
             <UniversalContext.Provider value={contextInformation}>
                 {children}
-            </UniversalContext.Provider>            
+            </UniversalContext.Provider>
         </div>
     );
 };

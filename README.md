@@ -8,6 +8,7 @@
 * npm install firebase
 * npm install react-hook-form
 * npm install react-icons --save
+* npm install react-loader-spinner --save
 
 
 ## Steps:
@@ -26,3 +27,12 @@
 * installed react-hook-form.
 * installed react icons for icons
 * Login page Decorated
+* google login auth implemented
+* Login Page functionality established
+* protected route created
+* protect route functionality implemented. 
+* installed react-loader-spinner
+* Applied fidget spinner on loading
+
+
+
