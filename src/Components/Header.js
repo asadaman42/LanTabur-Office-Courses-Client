@@ -6,7 +6,6 @@ import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -54,11 +53,11 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <LinkContainer to="/">
+                            <LinkContainer to="/courses">
                                 <Nav.Link href="">Courses</Nav.Link>
                             </LinkContainer>
 
-                            <LinkContainer to="/">
+                            <LinkContainer to="/blog">
                                 <Nav.Link href="">Blog</Nav.Link>
                             </LinkContainer>
 
@@ -73,7 +72,7 @@ const Header = () => {
                                 <Nav.Link className='my-auto' href="">
                                     {
                                         user ?
-                                            <Image style={{ height: '30px', width: '30px' }} roundedCircle src={user?.photoURL} referrerPolicy='no-referrer' /> :
+                                            <Image data-tip={user?.displayName} style={{ height: '30px', width: '30px' }} roundedCircle src={user?.photoURL} referrerPolicy='no-referrer' /> :
                                             <HiOutlineUser />
                                     }
                                 </Nav.Link>

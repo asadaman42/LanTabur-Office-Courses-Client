@@ -1,10 +1,14 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const CheckOut = () => {
+    const details = useLoaderData();
+    const { categoryName} = details[0];
+    
     return (
-        <div>
-                THis is Checkc OUt page. 
-        </div>
+        <h1>
+            {categoryName}
+        </h1>
     );
 };
 

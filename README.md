@@ -9,6 +9,8 @@
 * npm install react-hook-form
 * npm install react-icons --save
 * npm install react-loader-spinner --save
+* npm install react-tooltip
+* npm install react-to-pdf -force
 
 
 ## Steps:
