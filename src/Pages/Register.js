@@ -8,23 +8,29 @@ import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 
 const Register = () => {
-    const {createUserByEmailAndPassword} = useContext(UniversalContext);
+    const { createUserByEmailAndPassword, updatePhotoAndName } = useContext(UniversalContext);
+    const [checked, setChecked] = useState(false);
     const [error, setError] = useState('');
     const { register, handleSubmit } = useForm();
     const onSubmit = (data, e) => {
-        
-        const {name, email, PhotoURL, password} = data;
-        
+        const { name, email, PhotoURL, password } = data;
         createUserByEmailAndPassword(email, password)
-        .then(result => {
-            const user = result.user;
-            e.target.reset();
-            setError('')
-        })
-        .catch(error => {
-            console.error(error);
-            setError(error.message);
-        })
+            .then(result => {
+                const user = result.user;
+                e.target.reset();
+                setError('')
+                updatePhotoAndName({ displayName: name, PhotoURL: PhotoURL })
+                    .then(() => { })
+                    .catch(e => console.error(error))
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            })
+    }
+
+    const checkedIt = (event) => {
+        setChecked(event.target.checked);
     }
 
     return (
@@ -60,10 +66,13 @@ const Register = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Accept our terms and conditions." />
+                    <Form.Check
+                        onClick={checkedIt}
+                        type="checkbox"
+                        label=" I accept mentioned terms and conditions." />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="mb-3">
+                <Button disabled={!checked} variant="primary" type="submit" className="mb-3">
                     Register
                 </Button>
 

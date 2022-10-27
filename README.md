@@ -33,6 +33,8 @@
 * protect route functionality implemented. 
 * installed react-loader-spinner
 * Applied fidget spinner on loading
+* name and photo update
+* accept checkbox made functional
 
 
 

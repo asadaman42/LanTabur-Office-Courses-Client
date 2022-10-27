@@ -13,7 +13,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Image } from 'react-bootstrap';
 
 import { HiOutlineUser } from "react-icons/hi";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { FidgetSpinner } from 'react-loader-spinner'
 
@@ -25,6 +25,7 @@ const Header = () => {
     const { user, logOut, toggleMode, mode } = useContext(UniversalContext);
 
     const signOut = () => {
+        <Navigate to='/'></Navigate>
         logOut()
             .then(() => { })
             .catch(error => console.error(error));
@@ -68,48 +69,23 @@ const Header = () => {
                             <LinkContainer to="/">
                                 <Nav.Link href="">FAQ</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="/">
-                                <Nav.Link href="">
-                                    <FidgetSpinner
-                                        visible={true}
-                                        height="80"
-                                        width="80"
-                                        ariaLabel="dna-loading"
-                                        wrapperStyle={{}}
-                                        wrapperClass="dna-wrapper"
-                                        ballColors={['#ff0000', '#00ff00', '#0000ff']}
-                                        backgroundColor="#F4442E"
-                                    />
-
-                                </Nav.Link>
-                            </LinkContainer>
                         </Nav>
                         <Nav>
-                            <Form.Switch onClick={toggleMode} id="custom-switch" label="Dark Mode" />
-
-                            <LinkContainer to="/login">
-                                <Nav.Link href="">
-                                    <Button variant="primary">Log In</Button>
-                                </Nav.Link>
-                            </LinkContainer>
+                            <Form.Switch className='my-auto' onClick={toggleMode} id="custom-switch" label="Dark Mode" />
 
                             <LinkContainer to="/">
-                                <Nav.Link href="">
+                                <Nav.Link className='my-auto' href="">
                                     {
                                         user ?
-                                            <Image style={{ height: '30px', width: '30px' }} roundedCircle src={user?.photoURL} /> :
+                                            <Image style={{ height: '30px', width: '30px' }} roundedCircle src={user?.photoURL} referrerPolicy='no-referrer' /> :
                                             <HiOutlineUser />
                                     }
                                 </Nav.Link>
                             </LinkContainer>
 
 
-                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="">  </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="">Separated link</NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link href="#deets">
+
+                            <Nav.Link href="">
                                 {
                                     user?.uid ?
                                         <>
@@ -118,13 +94,13 @@ const Header = () => {
                                         </>
                                         :
                                         <>
-                                            <Link to='/login'> Log In</Link>
-                                            <Link to='/register'> Register </Link>
+                                            <Link to='/login'> <Button>Log In</Button></Link>
+                                            <Link to='/register'> <Button> Register </Button> </Link>
                                         </>
 
                                 }
                             </Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
+                            <Nav.Link href="">
                                 {user?.displayName}
                             </Nav.Link>
                         </Nav>

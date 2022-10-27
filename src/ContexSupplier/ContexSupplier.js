@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../FireBase/FireBase.config';
 import { useEffect } from 'react';
 
@@ -34,10 +34,13 @@ const ContexSupplier = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    const updatePhotoAndName = photoAndName => {
+        updateProfile(auth.currentUser, photoAndName);
+    }
+
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged (auth, (presentStudent) => {
-            console.log(presentStudent);
+        const unsubscribe = onAuthStateChanged(auth, (presentStudent) => {
             setUser(presentStudent);
             setLoading(false);
         });
@@ -65,7 +68,7 @@ const ContexSupplier = ({ children }) => {
         }
     };
 
-    
+
 
     const contextInformation = {
         user,
@@ -76,6 +79,7 @@ const ContexSupplier = ({ children }) => {
         createUserByEmailAndPassword,
         emailLoginProvider,
         loading,
+        updatePhotoAndName,
     };
 
     return (
