@@ -17,13 +17,12 @@ const Register = () => {
         const { name, email, PhotoURL, password } = data;
         createUserByEmailAndPassword(email, password)
             .then(result => {
-                const user = result.user;
                 e.target.reset();
                 setError('');
                 handleEmailVerify();
                 handleUpdatePhotoAndName(name, PhotoURL);
                 toast.success('verification mail sent to your email address');
-                <Navigate to = '/login'></Navigate>
+                <Navigate to='/login'></Navigate>
             })
 
             .catch(error => {

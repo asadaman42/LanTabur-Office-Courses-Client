@@ -49,6 +49,9 @@ const ContexSupplier = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (presentStudent) => {
+            // if(presentStudent === null || presentStudent.emailVerified){
+            //     setUser(presentStudent);
+            // }
             setUser(presentStudent);
             setLoading(false);
         });
