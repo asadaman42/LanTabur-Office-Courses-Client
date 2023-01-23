@@ -35,17 +35,17 @@ export const routes = createBrowserRouter([
             {
                 path: '/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('https://10th-assignment-25-10-22-server.vercel.app/category/')
+                loader: () => fetch('https://lantabur-office-courses-server.vercel.app/category/')
             },
             {
                 path: '/category/:id',
                 element: <ViewDetails></ViewDetails>,
-                loader: ({ params }) => fetch(`https://10th-assignment-25-10-22-server.vercel.app/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://lantabur-office-courses-server.vercel.app/category/${params.id}`)
             },
             {
                 path: '/checkout/:id',
                 element: <Protected> <CheckOut></CheckOut> </Protected>,
-                loader: ({ params }) => fetch(`https://10th-assignment-25-10-22-server.vercel.app/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://lantabur-office-courses-server.vercel.app/category/${params.id}`)
 
             },
             {

@@ -8,7 +8,7 @@ const LeftSideNav = () => {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-        fetch('https://10th-assignment-25-10-22-server.vercel.app/category/')
+        fetch('https://lantabur-office-courses-server.vercel.app/category/')
             .then(res => res.json())
             .then(data => setCategory(data));
     }, []);
